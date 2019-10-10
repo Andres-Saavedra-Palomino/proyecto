@@ -1,6 +1,5 @@
 import mongoose = require('mongoose')
 import configDatabase = require('../config/database.config')
-import { resolve } from 'dns'
 
 
 const initializeDataBase = async () => {
@@ -15,7 +14,8 @@ const initializeDataBase = async () => {
 		})
 
 		mongoose.connection.on("connected", () => {
-			require("../models").User
+			console.log("mongoose conection")
+			require("../models").Users
 
 			resolve()
 		})

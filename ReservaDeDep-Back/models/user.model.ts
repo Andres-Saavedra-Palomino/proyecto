@@ -15,9 +15,9 @@ const schema = new mongoose.Schema({
 		type: String,
 		trim: true,
 		required: true,
-	},
+	}
 })
 
-const model = mongoose.model("User", schema)
+const model = mongoose.model("Users", schema)
 
 export default model

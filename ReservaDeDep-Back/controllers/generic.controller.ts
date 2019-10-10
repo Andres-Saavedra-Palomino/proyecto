@@ -22,9 +22,11 @@ class GenericController {
 
 	async insert(req, res) {
 		const data = req.body
-
-		const usuario = new this.model(data)
-		await usuario.save()
+		console.log("insertando...")
+		const users = new this.model(data)
+		console.log(users)
+		await users.save()
+		console.log("insertado exitoso")
 
 		res
 			.status(201)

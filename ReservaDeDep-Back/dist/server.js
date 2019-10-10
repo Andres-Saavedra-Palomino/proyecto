@@ -13,6 +13,7 @@ const express = require("express");
 const http = require("http");
 const routes_1 = require("./routes");
 const bodyParser = require("body-parser");
+const database_service_1 = require("./services/database.service");
 let httpServer;
 let app = express();
 const port = 3000;
@@ -29,7 +30,7 @@ const initialize = () => {
             res.json({ status: 409, message: "This account is not allowed to use this service" });
         });
         app.use("/tenants", routes_1.RouterTenants);
-        app.use("/renters", routes_1.RouterRenters);
+        app.use("/users", routes_1.RouterUsers);
         httpServer.listen(port)
             .on("listening in port " + port, () => resolve())
             .on("error", err => reject(err));
@@ -43,6 +44,15 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
     }
     catch (error) {
         console.log("Ocurrió un error");
+        console.log(error);
+    }
+    try {
+        console.log("Connecting to MongoDB");
+        yield database_service_1.initializeDataBase();
+        console.log("Connection Successful");
+    }
+    catch (error) {
+        console.log("Connection Error");
         console.log(error);
     }
 });

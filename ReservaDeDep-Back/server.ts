@@ -1,6 +1,6 @@
 import express = require("express")
 import * as http from "http"
-import { IRequest } from './interfaces/OfRequest'
+import { IRequest } from './interfaces/IRequest'
 import { RouterUsers, RouterTenants } from "./routes"
 import * as bodyParser from "body-parser"
 import { initializeDataBase } from "./services/database.service"
