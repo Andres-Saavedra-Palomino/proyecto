@@ -1,11 +1,11 @@
-import { ControllerRenters } from '../controllers/';
+import { ControllerUsers } from '../controllers';
 import express = require("express")
 
 const Router = express.Router()
-const controller = new ControllerRenters()
+const controller = new ControllerUsers()
 
 Router.get("/", controller.list)
-//@validators(schemaRenters.getRentersThisOne)
+//@validators(schemaRenters.getUsersThisOne)
 Router.get("/:id/:level", controller.thisOne)
 Router.post("/", controller.insert)
 Router.put("/", controller.update)

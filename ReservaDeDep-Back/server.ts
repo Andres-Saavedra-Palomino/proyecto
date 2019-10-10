@@ -1,7 +1,7 @@
 import express = require("express")
 import * as http from "http"
 import { IRequest } from './interfaces/OfRequest'
-import { RouterRenters, RouterTenants } from "./routes"
+import { RouterUsers, RouterTenants } from "./routes"
 import * as bodyParser from "body-parser"
 import { initializeDataBase } from "./services/database.service"
 
@@ -27,7 +27,7 @@ const initialize = (): Promise<any> => {
 		})
 
 		app.use("/tenants", RouterTenants)
-		app.use("/renters", RouterRenters)
+		app.use("/users", RouterUsers)
 
 		httpServer.listen(port)
 			.on("listening in port " + port, () => resolve())

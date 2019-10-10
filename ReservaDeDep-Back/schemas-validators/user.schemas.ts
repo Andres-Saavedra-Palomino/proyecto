@@ -1,7 +1,7 @@
 import * as Joi from '@hapi/joi'
 
 const esquemas = {
-	getRentersThisOne: {
+	getUsersThisOne: {
 		params: Joi.object().keys({
 			id: Joi.number(),
 			nivel: Joi.string().regex(/^[a-zA-Z]{2}[0-9]{4,10}$/)
