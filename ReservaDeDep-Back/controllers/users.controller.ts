@@ -1,8 +1,10 @@
 import GenericController from "./generic.controller";
+import { User } from '../models'
+
 
 class Controller extends GenericController {
 	constructor() {
-		super("Renters")
+		super(User)
 	}
 }
 

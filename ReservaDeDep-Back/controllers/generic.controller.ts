@@ -2,17 +2,30 @@ class GenericController {
 
 	constructor(private model: any) {
 		this.list = this.list.bind(this)
+		this.thisOne = this.thisOne.bind(this)
+		this.insert = this.insert.bind(this)
+		this.update = this.update.bind(this)
+		this.delete = this.delete.bind(this)
 	}
 
-	list(req, res) {
-		res.status(200).type("application/json").send({ name: this.model + " Fullstack", ruta: req.url, model: this.model })
+	async list(req, res, next) {
+		const data = await this.model.find()
+
+		res
+			.status(200)
+			.json(data)
 	}
 
 	thisOne(req, res) {
-		res.status(200).type("application/json").send({ name: "Fullstack Detalle", ruta: req.url, userId: ` ${req.params.id}` })
+		res.status(200).type("application/json").send({ name: "Fullstack Detalle", ruta: req.url, userId: ` ${req.params._id}` })
 	}
 
-	insert(req, res) {
+	async insert(req, res) {
+		const data = req.body
+
+		const usuario = new this.model(data)
+		await usuario.save()
+
 		res
 			.status(201)
 			.json({
@@ -21,22 +34,20 @@ class GenericController {
 			})
 	}
 
-	update(req, res) {
-		res
-			.status(201)
-			.json({
-				status: 201,
-				message: `Usuario actualizado`
-			})
+	async update(req, res) {
+		const _id = req.params._id
+
+		await this.model.findOneAndUpdate({ _id }, req.body)
+
+		res.send("Documento actualizado")
 	}
 
-	delete(req, res) {
-		res
-			.status(201)
-			.json({
-				status: 201,
-				message: "Usuario eliminado"
-			})
+	async delete(req, res) {
+		const _id = req.params._id
+
+		await this.model.findOneAndRemove({ _id })
+
+		res.send("Documento eliminado")
 	}
 }
 

@@ -5,10 +5,10 @@ const Router = express.Router()
 const controller = new ControllerUsers()
 
 Router.get("/", controller.list)
-//@validators(schemaRenters.getUsersThisOne)
-Router.get("/:id/:level", controller.thisOne)
+//@validators(schemaUsers.getUsersThisOne)
+Router.get("/:id", controller.thisOne)
 Router.post("/", controller.insert)
-Router.put("/", controller.update)
-Router.delete("/", controller.delete)
+Router.put("/:_id", controller.update)
+Router.delete("/:_id", controller.delete)
 
 export default Router
