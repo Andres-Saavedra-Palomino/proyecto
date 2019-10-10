@@ -1,8 +1,9 @@
 import express = require("express")
 import * as http from "http"
-import { OfRequest } from './interfaces/OfRequest'
+import { IRequest } from './interfaces/OfRequest'
 import { RouterRenters, RouterTenants } from "./routes"
 import * as bodyParser from "body-parser"
+import { initializeDataBase } from "./services/database.service"
 
 let httpServer: http.Server
 let app = express()
@@ -16,7 +17,7 @@ const initialize = (): Promise<any> => {
 		app.use(bodyParser.json())
 		app.use(bodyParser.urlencoded({ extended: false }))
 
-		app.use("/admin", (req: OfRequest, res, next) => {
+		app.use("/admin", (req: IRequest, res, next) => {
 			req.isAuthenticated = true
 			next()
 		})
@@ -44,6 +45,14 @@ const start = async () => {
 		console.log("Ocurrió un error")
 		console.log(error)
 
+	}
+	try {
+		console.log("Connecting to MongoDB")
+		await initializeDataBase()
+		console.log("Connection Successful")
+	} catch (error) {
+		console.log("Connection Error")
+		console.log(error)
 	}
 }
 

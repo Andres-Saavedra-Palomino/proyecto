@@ -1,4 +1,4 @@
 import { Request } from "express"
-export interface OfRequest extends Request {
+export interface IRequest extends Request {
 	isAuthenticated?: boolean
 }
