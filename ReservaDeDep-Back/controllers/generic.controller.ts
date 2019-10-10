@@ -2,10 +2,6 @@ class GenericController {
 
 	constructor(private model: any) {
 		this.list = this.list.bind(this)
-		this.thisOne = this.thisOne.bind(this)
-		this.insert = this.insert.bind(this)
-		this.update = this.update.bind(this)
-		this.delete = this.delete.bind(this)
 	}
 
 	list(req, res) {
