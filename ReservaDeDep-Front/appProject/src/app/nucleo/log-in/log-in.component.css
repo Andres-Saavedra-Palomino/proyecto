@@ -1,0 +1,9 @@
+@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
+
+.kpx_btn-facebook{
+	background-color: #3b5998;
+	color: white;
+}
+.kpx_btn-facebook:hover{
+	background-color: #172d5e;
+}
