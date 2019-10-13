@@ -1,14 +1,15 @@
-import { ControllerUsers } from '../controllers';
+import { ControllerUsers } from '../api-rest/controllers';
 import express = require("express")
+import { catchAsync } from "../handlers/errors.handler"
 
 const Router = express.Router()
 const controller = new ControllerUsers()
 
-Router.get("/", controller.list)
+Router.get("/", catchAsync(controller.list))
 //@validators(schemaUsers.getUsersThisOne)
-Router.get("/:id", controller.thisOne)
-Router.post("/", controller.insert)
-Router.put("/:_id", controller.update)
-Router.delete("/:_id", controller.delete)
+Router.get("/:_id", catchAsync(controller.thisOne))
+Router.post("/", catchAsync(controller.insert))
+Router.put("/:_id", catchAsync(controller.update))
+Router.delete("/:_id", catchAsync(controller.delete))
 
 export default Router

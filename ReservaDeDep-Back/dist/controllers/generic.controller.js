@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const httpStatus = require("http-status-codes");
 class GenericController {
     constructor(model) {
         this.model = model;
@@ -20,43 +21,65 @@ class GenericController {
     }
     list(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = yield this.model.find();
+            const results = yield this.model.find();
             res
-                .status(200)
-                .json(data);
+                .status(httpStatus.OK)
+                .json({
+                status: httpStatus.OK,
+                message: "List",
+                results
+            });
         });
     }
     thisOne(req, res) {
-        res.status(200).type("application/json").send({ name: "Fullstack Detalle", ruta: req.url, userId: ` ${req.params._id}` });
+        return __awaiter(this, void 0, void 0, function* () {
+            const data = req.params; // {_id: 'ccccc'}
+            const result = yield this.model.findOne(data);
+            res
+                .status(httpStatus.OK)
+                .json({
+                status: httpStatus.OK,
+                message: "Document Found",
+                result
+            });
+        });
     }
     insert(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const data = req.body;
-            console.log("insertando...");
-            const users = new this.model(data);
-            console.log(users);
-            yield users.save();
-            console.log("insertado exitoso");
+            const usuario = new this.model(data);
+            yield usuario.save();
             res
-                .status(201)
+                .status(httpStatus.CREATED)
                 .json({
-                status: 200,
-                message: "Usuario agregado"
+                status: httpStatus.CREATED,
+                message: "User added"
             });
         });
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const _id = req.params._id;
-            yield this.model.findOneAndUpdate({ _id }, req.body);
-            res.send("Documento actualizado");
+            const params = req.params; // {_id: "dddd"}
+            const body = req.body;
+            yield this.model.findOneAndUpdate(params, body);
+            res
+                .status(httpStatus.CREATED)
+                .json({
+                status: httpStatus.CREATED,
+                message: "Document updated"
+            });
         });
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const _id = req.params._id;
-            yield this.model.findOneAndRemove({ _id });
-            res.send("Documento eliminado");
+            const params = req.params;
+            yield this.model.findOneAndRemove(params);
+            res
+                .status(httpStatus.CREATED)
+                .json({
+                status: httpStatus.CREATED,
+                message: "Document deleted"
+            });
         });
     }
 }

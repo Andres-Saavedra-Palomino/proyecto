@@ -1,4 +1,4 @@
-import { ControllerTenants } from '../controllers';
+import { ControllerTenants } from '../api-rest/controllers';
 import express = require("express")
 
 const Router = express.Router()

@@ -1,20 +1,20 @@
 import mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
-	firstName: String,
-	lastName: String,
+	firstname: String,
+	lastname: String,
 	email: {
 		type: String,
 		email: true,
 		required: true,
 		size: 255,
 		unique: true,
-		lowercase: true,
+		lowercase: true
 	},
 	password: {
 		type: String,
 		trim: true,
-		required: true,
+		required: true
 	}
 })
 

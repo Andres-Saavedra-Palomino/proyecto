@@ -32,7 +32,7 @@ const initialize = () => {
         app.use("/tenants", routes_1.RouterTenants);
         app.use("/users", routes_1.RouterUsers);
         httpServer.listen(port)
-            .on("listening in port " + port, () => resolve())
+            .on("listening", () => resolve())
             .on("error", err => reject(err));
     });
 };

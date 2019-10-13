@@ -9,6 +9,7 @@ const initializeDataBase = async () => {
 		mongoose.connect(configDatabase.connectionString, {
 			keepAlive: true,
 			useNewUrlParser: true,
+			useFindAndModify: false,
 			useCreateIndex: true,
 			useUnifiedTopology: true
 		})

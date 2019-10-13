@@ -3,12 +3,11 @@ import * as http from "http"
 import { IRequest } from './interfaces/IRequest'
 import { RouterUsers, RouterTenants } from "./routes"
 import * as bodyParser from "body-parser"
-import { initializeDataBase } from "./services/database.service"
+import { initializeDataBase } from "./conection/services/database.service"
 
 let httpServer: http.Server
 let app = express()
 const port = 3000
-
 
 const initialize = (): Promise<any> => {
 	return new Promise((resolve, reject) => {
@@ -30,7 +29,7 @@ const initialize = (): Promise<any> => {
 		app.use("/users", RouterUsers)
 
 		httpServer.listen(port)
-			.on("listening in port " + port, () => resolve())
+			.on("listening", () => resolve())
 			.on("error", err => reject(err))
 	})
 }
