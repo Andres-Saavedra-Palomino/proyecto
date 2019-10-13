@@ -5,9 +5,13 @@ import { RouterUsers, RouterTenants } from "./routes"
 import * as bodyParser from "body-parser"
 import { initializeDataBase } from "./conection/services/database.service"
 
+
+const yenv = require("yenv")
+const env = yenv()
+
 let httpServer: http.Server
 let app = express()
-const port = 3000
+
 
 const initialize = (): Promise<any> => {
 	return new Promise((resolve, reject) => {
@@ -28,7 +32,7 @@ const initialize = (): Promise<any> => {
 		app.use("/tenants", RouterTenants)
 		app.use("/users", RouterUsers)
 
-		httpServer.listen(port)
+		httpServer.listen(env.PORT)
 			.on("listening", () => resolve())
 			.on("error", err => reject(err))
 	})

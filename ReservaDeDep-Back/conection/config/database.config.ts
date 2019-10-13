@@ -1,2 +1,6 @@
-const connectionString = `mongodb+srv://andresSP:1234567890@cluster0-kl4sz.mongodb.net/DB_TEST?retryWrites=true&w=majority`
+const yenv = require("yenv")
+const env = yenv()
+
+const connectionString = `mongodb+srv://${env.DB.USER}:${env.DB.PWD}@${env.DB.HOST}/${env.DB.NAME}?retryWrites=true&w=majority`
+
 export { connectionString }
