@@ -1,8 +1,6 @@
 import httpStatus = require("http-status-codes")
+import { IError } from "../interfaces/IError"
 
-interface IError extends Error {
-	status?: number
-}
 
 const catchAsync = (ftn: (req, res, next) => Promise<any>) => {
 	return (rq, rs, nx) => {
@@ -10,13 +8,7 @@ const catchAsync = (ftn: (req, res, next) => Promise<any>) => {
 			const err: IError = new Error(error.message)
 			err.status = 500
 			nx(err)
-			/* 			console.log(error)
-						rs
-							.status(httpStatus.INTERNAL_SERVER_ERROR)
-							.json({
-								status: httpStatus.INTERNAL_SERVER_ERROR,
-								message: error.message
-							}) */
+
 		})
 	}
 }
@@ -31,21 +23,21 @@ const pathNotFound = (req, res, next) => {
 const generalError = (error: IError, req, res, next) => {
 	const entorno: string = process.env.NODE_ENV
 
-	//if (entorno != "production")
-	return res
-		.status(error.status)
-		.json({
-			status: error.status,
-			message: error.message,
-			stack: entorno != "production" ? error.stack : "..."
-		})
-
-	/* 	res
+	if (entorno != "production")
+		return res
 			.status(error.status)
 			.json({
 				status: error.status,
-				message: error.message
-			}) */
+				message: error.message,
+				stack: error.stack
+			})
+
+	res
+		.status(error.status)
+		.json({
+			status: error.status,
+			message: error.message
+		})
 
 }
 

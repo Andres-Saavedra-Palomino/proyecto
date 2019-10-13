@@ -13,10 +13,12 @@ const express = require("express");
 const http = require("http");
 const routes_1 = require("./routes");
 const bodyParser = require("body-parser");
-const database_service_1 = require("./services/database.service");
+const database_service_1 = require("./conection/services/database.service");
+const errors_handler_1 = require("./handlers/errors.handler");
+const yenv = require("yenv");
+const env = yenv();
 let httpServer;
 let app = express();
-const port = 3000;
 const initialize = () => {
     return new Promise((resolve, reject) => {
         httpServer = http.createServer(app);
@@ -31,7 +33,9 @@ const initialize = () => {
         });
         app.use("/tenants", routes_1.RouterTenants);
         app.use("/users", routes_1.RouterUsers);
-        httpServer.listen(port)
+        app.use(errors_handler_1.pathNotFound);
+        app.use(errors_handler_1.generalError);
+        httpServer.listen(env.PORT)
             .on("listening", () => resolve())
             .on("error", err => reject(err));
     });

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const controllers_1 = require("../controllers");
+const controllers_1 = require("../api-rest/controllers");
 const express = require("express");
 const Router = express.Router();
 const controller = new controllers_1.ControllerTenants();

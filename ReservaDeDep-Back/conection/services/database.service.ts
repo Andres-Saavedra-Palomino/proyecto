@@ -16,7 +16,7 @@ const initializeDataBase = async () => {
 
 		mongoose.connection.on("connected", () => {
 			console.log("mongoose conection")
-			require("../models").Users
+			require("../../api-rest/models").Users
 
 			resolve()
 		})

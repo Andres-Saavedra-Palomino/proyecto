@@ -4,7 +4,7 @@ import { IRequest } from './interfaces/IRequest'
 import { RouterUsers, RouterTenants } from "./routes"
 import * as bodyParser from "body-parser"
 import { initializeDataBase } from "./conection/services/database.service"
-
+import { generalError, pathNotFound } from "./handlers/errors.handler"
 
 const yenv = require("yenv")
 const env = yenv()
@@ -31,6 +31,9 @@ const initialize = (): Promise<any> => {
 
 		app.use("/tenants", RouterTenants)
 		app.use("/users", RouterUsers)
+
+		app.use(pathNotFound)
+		app.use(generalError)
 
 		httpServer.listen(env.PORT)
 			.on("listening", () => resolve())
