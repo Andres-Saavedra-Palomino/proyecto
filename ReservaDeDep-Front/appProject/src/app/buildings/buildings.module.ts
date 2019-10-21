@@ -7,7 +7,10 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { FullCalendarModule } from '@fullcalendar/angular'
 
 @NgModule({
-	declarations: [ListComponent, CalendarComponent],
+	declarations: [
+		ListComponent,
+		CalendarComponent
+	],
 	imports: [
 		CommonModule,
 		BuildingsRoutingModule,

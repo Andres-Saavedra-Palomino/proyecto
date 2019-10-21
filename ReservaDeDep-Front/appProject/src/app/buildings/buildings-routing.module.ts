@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListComponent } from './list/list.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { AutenticacionGuard } from '../guards/autenticacion.guard';
 
 
 const routes: Routes = [
@@ -10,6 +11,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
+
 	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule]
 })

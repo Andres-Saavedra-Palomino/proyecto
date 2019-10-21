@@ -7,10 +7,15 @@ import { FavoritesComponent } from './favorites/favorites.component';
 
 
 const routes: Routes = [
-	{ path: '', component: BookingsComponent },
-	{ path: 'personalInfo', component: PersonalInfoComponent },
-	{ path: 'records', component: RecordsComponent },
-	{ path: 'favorites', component: FavoritesComponent },
+	{
+		path: '', children: [
+			{ path: '', component: BookingsComponent },
+			{ path: 'personalInfo', component: PersonalInfoComponent },
+			{ path: 'records', component: RecordsComponent },
+			{ path: 'favorites', component: FavoritesComponent },
+		]
+	}
+
 ];
 
 @NgModule({

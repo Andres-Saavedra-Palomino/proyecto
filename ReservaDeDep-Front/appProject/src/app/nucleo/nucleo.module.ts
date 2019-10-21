@@ -9,7 +9,7 @@ import { LogInComponent } from './log-in/log-in.component';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 import { HeaderComponent } from './header/header.component';
 import { RegisterComponent } from './register/register.component';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,11 +18,12 @@ import { FormsModule } from '@angular/forms';
 		LogInComponent,
 		ForgotPassComponent,
 		RegisterComponent,
-		InexistentUrlComponent, HeaderComponent],
+		InexistentUrlComponent,
+		HeaderComponent],
 	imports: [
 		CommonModule,
 		NucleoRoutingModule,
-		FormsModule
+		ReactiveFormsModule,
 	],
 	exports: [
 		InexistentUrlComponent,

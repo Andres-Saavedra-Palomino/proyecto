@@ -1,49 +1,23 @@
-<div class="container-fluid align-middle">
+<div class="container-fluid">
 	<div class="row justify-content-center mb-5">
-		<h1 class="col-12 text-center">Inicio de Sesion</h1>
+		<h1 class="col-6">Log In</h1>
 	</div>
+	<a routerLink="/registrar">Registrarme</a>
 	<div class="row justify-content-center">
-		<div class="col-xs-2 col-sm-2">
-			<button class="btn btn-lg btn-block kpx_btn-facebook" data-toggle="tooltip" data-placement="top"
-				title="Facebook" (click)="loginWithFB()">
-				<i class="fa fa-facebook fa-2x"></i>
-				<span class="hidden-xs"></span>
-			</button>
-		</div>
-	</div>
-	<div class="row justify-content-center mt-3 mb-3">
-		<div class="col-4">
-			<hr>
-		</div>
-	</div>
-	<div class="row justify-content-center m-auto">
-
-		<form class="col-4" #formulario=ngForm (ngSubmit)="registrar(formulario)">
+		<form class="col-6" [formGroup]="loginForm" (submit)="logearUsuario()">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Correo" name="correo" ngModel email required
-					#correo='ngModel'>
-				<span *ngIf="correo.invalid && correo.touched && correo.errors.required">El correo es Obligatorio</span>
-				<span *ngIf="correo.invalid && correo.touched && correo.errors.email">El formato no es de un
-					correo</span>
+				<input type="text" class="form-control" name="user" formControlName="user"
+					placeholder="usuario@ejemplo.com">
+				<span *ngIf="loginForm.get('user').hasError('required') && loginForm.get('user').touched">Campo
+					requerido</span>
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Nombre" name="nombre" ngModel required
-					#nombre='ngModel'>
-				<!-- <span>El correo es Obligatorio</span> -->
+				<input type="password" class="form-control" name="pass" formControlName="pass" placeholder="**********">
+				<span *ngIf="loginForm.get('pass').hasError('required') && loginForm.get('pass').touched">Campo
+					requerido</span>
 			</div>
-			<div class="form-group">
-				<input type="password" class="form-control" placeholder="Contrasena" name="contrasena" ngModel required
-					#contrasena='ngModel'>
-			</div>
-			<div class="form-group">
-				<input type="number" min="18" class="form-control" placeholder="Edad" name="edad" ngModel required
-					#edad='ngModel'>
-				<span *ngIf="edad.touched && edad.pristine">El Campo es Obligatorio</span>
-
-				<span *ngIf="edad.touched && edad.dirty && edad.value < 17">Debes ser mayor de 18</span>
-			</div>
-			<div>
-				<button class="btn btn-success btn-block" [disabled]="formulario.invalid">Ingresar</button>
+			<div class="d-flex justify-content-center">
+				<button type="submit" class="btn btn-success" [disabled]="loginForm.invalid">Ingresar</button>
 			</div>
 		</form>
 	</div>

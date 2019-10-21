@@ -5,15 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { NucleoModule } from './nucleo/nucleo.module';
+import { FormsModule } from '@angular/forms';
+import { BuildingsModule } from './buildings/buildings.module';
+import { TenantsModule } from './tenants/tenants.module';
 
 @NgModule({
 	declarations: [
-		AppComponent,
+		AppComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
-		NucleoModule
+		NucleoModule,
+		FormsModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]

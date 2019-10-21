@@ -3,32 +3,26 @@
 		<h1 class="col-6">Registrate</h1>
 	</div>
 	<div class="row justify-content-center">
-		<form class="col-4" #formulario=ngForm (ngSubmit)="registrar(formulario)">
+		<form class="col-6" [formGroup]="registroForm" (ngSubmit)="registrarUsuario()">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Correo" name="correo" ngModel email required
-					#correo='ngModel'>
-				<span *ngIf="correo.invalid && correo.touched && correo.errors.required">El correo es Obligatorio</span>
-				<span *ngIf="correo.invalid && correo.touched && correo.errors.email">El formato no es de un
-					correo</span>
+				<input type="text" class="form-control" name="nombre" formControlName="name" placeholder="usuario">
+				<span *ngIf="registroForm.get('name').hasError('required') && registroForm.get('name').touched">Campo
+					requerido</span>
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Nombre" name="nombre" ngModel required
-					#nombre='ngModel'>
-				<!-- <span>El correo es Obligatorio</span> -->
+				<input type="email" class="form-control" name="user" formControlName="user"
+					placeholder="usuario@ejemplo.com">
+				<span *ngIf="registroForm.get('user').hasError('required') && registroForm.get('user').touched">Campo
+					requerido</span>
 			</div>
 			<div class="form-group">
-				<input type="password" class="form-control" placeholder="Contrasena" name="contrasena" ngModel required
-					#contrasena='ngModel'>
-			</div>
-			<div class="form-group">
-				<input type="number" min="18" class="form-control" placeholder="Edad" name="edad" ngModel required
-					#edad='ngModel'>
-				<span *ngIf="edad.touched && edad.pristine">El Campo es Obligatorio</span>
+				<input type="password" class="form-control" name="pass" formControlName="pass" placeholder="**********">
 
-				<span *ngIf="edad.touched && edad.dirty && edad.value < 17">Debes ser mayor de 18</span>
+				<span *ngIf="registroForm.get('pass').hasError('required') && registroForm.get('pass').touched">Campo
+					requerido</span>
 			</div>
-			<div>
-				<button class="btn btn-success btn-block" [disabled]="formulario.invalid">Ingresar</button>
+			<div class="d-flex justify-content-center">
+				<button class="btn btn-success" [disabled]="registroForm.invalid">Ingresar</button>
 			</div>
 		</form>
 	</div>
